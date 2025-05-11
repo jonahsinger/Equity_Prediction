@@ -28,6 +28,16 @@ small_cap_tickers = [
     'PNM', 'PRGS', 'SLP', 'TILE', 'TREX', 'UEIC', 'UVV', 'WINA', 'WDFC', 'SCX'
 ]
 
+all_tickers = large_cap_tickers + mid_cap_tickers + small_cap_tickers
+ticker_category = {}
+for ticker in large_cap_tickers:
+    ticker_category[ticker] = 'Large Cap'
+for ticker in mid_cap_tickers:
+    ticker_category[ticker] = 'Mid Cap'
+for ticker in small_cap_tickers:
+    ticker_category[ticker] = 'Small Cap'
+
+# Set time period for data
 end_date = datetime.now()
 start_date = end_date - timedelta(days=25*365)
 
@@ -96,6 +106,13 @@ def calculate_features(prices_df, volumes_df):
     
     return daily_returns, features
 
+
+def main():
+    close_prices, volumes, fundamental_df = fetch_stock_data(all_tickers, start_date, end_date)
+
+
+if __name__ == "__main__":
+    results = main()
 
 # get info from yahoo finance of Features
 #  include historical price change, historical volume change, market capitalization,
