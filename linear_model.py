@@ -20,7 +20,6 @@ print(f"y shape: {y.shape}")
 # Split the data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Print data shapes after split
 print("\nData shapes after split:")
 print(f"X_train shape: {X_train.shape}")
 print(f"X_test shape: {X_test.shape}")
