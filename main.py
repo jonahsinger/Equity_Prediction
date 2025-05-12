@@ -1,5 +1,5 @@
 import pandas as pd
-from train import load_and_prepare_data, split
+from train import load_and_prepare_data, split, preprocess_data, train_model, evaluate_model, plot_results
 
 # Load the data from CSV
 df = pd.read_csv('data.csv')
@@ -13,13 +13,11 @@ print("\nDataFrame Info:")
 print(df.info())
 
 X_train, X_test, y_train, y_test = split(df)
-X_train = X_train.drop(columns=["ticker"])
-X_test = X_test.drop(columns=["ticker"])
 
-print("\n[2] Train/Test Split:")
-print(f"X_train: {X_train.shape}, y_train: {y_train.shape}")
-print(f"X_test: {X_test.shape}, y_test: {y_test.shape}")
-print("\nSample of training features:")
-print(X_train.head())
-print("\nSample of training labels:")
-print(y_train.head())
+X_train_scaled, X_test_scaled, scaler = preprocess_data(X_train, X_test)
+
+model = train_model(X_train_scaled, y_train)
+
+y_pred = evaluate_model(model, X_test_scaled, y_test)
+
+plot_results(y_test, y_pred)
