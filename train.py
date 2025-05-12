@@ -1,10 +1,9 @@
+import pandas as pd
 
 
 
 RANDOM_SEED = 42
 TEST_SIZE = 0.2
-N_ESTIMATORS = 100
-MAX_DEPTH = 10
 def load_and_prepare_data(file_path="data.csv"):
     # Load the data
     df = pd.read_csv(file_path, parse_dates=['date'], index_col='date')
@@ -20,7 +19,7 @@ def load_and_prepare_data(file_path="data.csv"):
     return df
 
 
-def simple_train_test_split(df, test_size=TEST_SIZE):
+def split(df, test_size=TEST_SIZE):
     df = df.sort_index()
     
     split_idx = int(len(df) * (1 - test_size))
