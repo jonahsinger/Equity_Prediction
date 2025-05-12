@@ -56,7 +56,7 @@ def plot_scatter_actual_vs_predicted(y_test, y_pred, model_name):
     # ideal line (y = x)
     min_val = min(min(y_test), min(y_pred))
     max_val = max(max(y_test), max(y_pred))
-    plt.plot([min_val, max_val], [min_val, max_val], 'r--', label='Perfect Prediction')
+    plt.plot([min_val, max_val], [min_val, max_val], 'r--')
 
     plt.title(f'{model_name}')
     plt.xlabel('Actual Values')
