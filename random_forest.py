@@ -44,17 +44,23 @@ def evaluate_rf(model, X_test, y_test):
     return y_pred
 
 
-def plot_model_vs_actual(y_test, y_pred, label, filename_suffix):
-    plt.figure(figsize=(12, 6))
-    plt.plot(y_test.index, y_test.values, label='Actual Returns', color='black', linestyle='--', marker='o', alpha=0.5)
-    plt.plot(y_test.index, y_pred, label=f'{label} Prediction', marker='x', alpha=0.6)
+def plot_scatter_actual_vs_predicted(y_test, y_pred, model_name):
+    plt.figure(figsize=(10, 6))
 
-    plt.title(f'{label} Weekly Stock Return Prediction')
-    plt.xlabel('Date')
-    plt.ylabel('Return (%)')
+    plt.scatter(y_test, y_pred, alpha=0.5)
+
+    # ideal line (y = x)
+    min_val = min(min(y_test), min(y_pred))
+    max_val = max(max(y_test), max(y_pred))
+    plt.plot([min_val, max_val], [min_val, max_val], 'r--')
+
+    plt.title(f'{model_name}')
+    plt.xlabel('Actual Values')
+    plt.ylabel('Predicted Values')
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
-    plt.savefig(f'return_predictions_{filename_suffix}.png')
+    plt.savefig(f'actual_vs_predicted_{model_name.lower().replace(" ", "_")}.png')
     plt.show()
+
 

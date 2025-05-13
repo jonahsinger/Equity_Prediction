@@ -1,6 +1,6 @@
 import pandas as pd
 from prepare import load_and_prepare_data, split, preprocess_data
-from random_forest import train_rf_model, evaluate_rf, plot_model_vs_actual
+from random_forest import train_rf_model, evaluate_rf, plot_scatter_actual_vs_predicted
 from gradient_boost import train_gb_model, evaluate_gb
 
 df = pd.read_csv('data.csv')
@@ -33,5 +33,5 @@ models_results = {
     'Gradient Boosting': gb_pred
 }
 
-plot_model_vs_actual(y_test, rf_pred, 'Random Forest', 'rf')
-plot_model_vs_actual(y_test, gb_pred, 'Gradient Boosting', 'gb')
+plot_scatter_actual_vs_predicted(y_test, rf_pred, 'Random Forest')
+plot_scatter_actual_vs_predicted(y_test, gb_pred, "Gradient Boosting")
