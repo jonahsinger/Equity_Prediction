@@ -8,12 +8,23 @@ import matplotlib.pyplot as plt
 # Load the data
 df = pd.read_csv('data.csv')
 
+lower_bound = -0.15
+upper_bound = 0.15
+
+original_count = len(df)
+df_filtered = df[(df['y'] > lower_bound) & (df['y'] < upper_bound)]
+filtered_count = len(df_filtered)
+
+print(f"Original data points: {original_count}")
+print(f"Data points after filtering 'y' between {lower_bound} and {upper_bound}: {filtered_count}")
+print(f"Removed {original_count - filtered_count} data points.")
+
 # Prepare features and target
-X = df.drop(['date', 'ticker', 'y'], axis=1)  # Features
-y = df['y']  # Target variable
+X = df_filtered.drop(['date', 'ticker', 'y'], axis=1)  # Features
+y = df_filtered['y']  # Target variable
 
 # Print data shapes before split
-print("\nData shapes before split:")
+print("\nData shapes before split (after filtering):")
 print(f"X shape: {X.shape}")
 print(f"y shape: {y.shape}")
 
@@ -63,6 +74,7 @@ plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2
 plt.xlabel('Actual Values')
 plt.ylabel('Predicted Values')
 plt.title('Linear Regression')
+plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig('linear_regression_results.png')
 plt.close()
